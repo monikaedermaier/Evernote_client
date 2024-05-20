@@ -1,0 +1,77 @@
+<h1>Administration</h1>
+
+<p>
+  Willkommen im Administrationsbereich! Hier können Sie alle wichtigen Elemente Ihrer Anwendung verwalten
+  und organisieren. Nutzen Sie die folgenden Funktionen, um Ihre Inhalte effizient zu strukturieren
+</p>
+
+<!--<button class="ui primary button" [routerLink]="['/admin/collection-form']">
+  Collection anlegen
+</button>
+
+<button class="ui primary button" [routerLink]="['/admin/note-form']">
+  Notiz anlegen
+</button>
+
+<button class="ui primary button" [routerLink]="['/admin/tag-form']">
+  Tag anlegen
+</button>
+
+<button class="ui primary button" [routerLink]="['/admin/todo-form']">
+  Todo anlegen
+</button>-->
+
+<div class="ui cards">
+  <div class="card">
+    <div class="content">
+      <div class="header">Collection</div>
+      <div class="description">
+        Erstelle eine Collection, um alle deine Aufgaben übersichtlich zu sammeln.
+      </div>
+    </div>
+    <div class="ui bottom attached button" [routerLink]="['/admin/collection-form']">
+      <i class="add icon"></i>
+      Collection anlegen
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">Notizen</div>
+      <div class="description">
+        Erstelle Notizen, um deine Gedanken festzuhalten.
+      </div>
+    </div>
+    <div class="ui bottom attached button" [routerLink]="['/admin/note-form']">
+      <i class="add icon"></i>
+      Notiz anlegen
+    </div>
+  </div>
+</div>
+
+<div class="ui cards">
+  <div class="card">
+    <div class="content">
+      <div class="header">ToDos</div>
+      <div class="description">
+        Erstelle deine ToDos, um deine Aufgaben zu strukturieren.
+      </div>
+    </div>
+    <div class="ui bottom attached button" [routerLink]="['/admin/todo-form']">
+      <i class="add icon"></i>
+      Todo anlegen
+    </div>
+  </div>
+  <div class="card">
+    <div class="content">
+      <div class="header">Tags</div>
+      <div class="description">
+        Lege Tags an, um deine Notizen und ToDos besser kategorieren zu können.
+      </div>
+    </div>
+    <div class="ui bottom attached button" [routerLink]="['/admin/tag-form']">
+      <i class="add icon"></i>
+      Tag anlegen
+    </div>
+  </div>
+</div>
+

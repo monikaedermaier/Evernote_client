@@ -1,0 +1,13 @@
+@if (todo && todo.images && todo.images[0]){
+  <img class="ui tiny image" [src]="todo.images[0].url"/>
+}
+<div class="content">
+  <div class="header">({{ todo?.id }}) {{ todo?.title }}</div>
+  <div class="description">{{ todo?.description }}</div>
+  <div class="extra">Fälligkeitsdatum: {{ todo?.dueDate | date: 'longDate' }} </div>
+  <div class="metadata">
+    @for (user of todo?.users; track user; let l =$last) {
+      <span>({{ user.id }}) {{ user.firstName }} {{ user.lastName }}@if(!l){, }</span>
+    }
+  </div>
+</div>

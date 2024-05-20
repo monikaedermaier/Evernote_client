@@ -1,0 +1,36 @@
+@if(tag){
+    <div class="twelve wide column">
+      <h1 class="ui header">{{ tag.title }}</h1>
+      <div class="ui divider"></div>
+      <div class="ui grid">
+        <div class="four wide column">
+          <h4 class="ui header">ToDos</h4>
+          @for (todo of tag?.todos; track todo; let l =$last) {
+            <span>{{ todo.id }} {{ todo.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Notizen</h4>
+          @for (note of tag?.notes; track note; let l =$last) {
+            <span>{{ note.id }} {{ note.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">User</h4>
+          {{ tag.user_id }}
+      </div>
+    </div>
+  </div>
+  <br> <br> <br>
+  <div class="ui buttons">
+  <button [routerLink]="'/tags'" class="ui blue button">Zurück zur Liste</button>
+  @if (authService.isLoggedIn()){
+    <button class="ui red labeled icon button" (click)="deleteTag()"><i class="remove icon"></i>Tag löschen</button>
+    <a class="ui yellow labeled icon button" [routerLink]="['../../admin/tag-form', tag.id]">
+      <i class="edit icon"></i>Tag bearbeiten
+    </a>
+  }
+  </div>
+}
+
+

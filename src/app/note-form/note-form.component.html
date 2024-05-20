@@ -1,0 +1,93 @@
+<h1>Notizformular</h1>
+<form  class="ui large form" [formGroup]="noteForm" (ngSubmit)="submitForm()">
+  <div class="field">
+    <label>Titel *</label>
+    <input type="text" id="title" formControlName="title">
+    @if(errors['title']){
+      <div class="ui negative message"> {{ errors['title'] }} </div>
+    }
+  </div>
+  <div class="field">
+    <label>Beschreibung</label>
+    <textarea formControlName="description" rows="3"></textarea>
+  </div>
+  <div class="field">
+    <label>Bilder</label>
+    <div formArrayName="images">
+      @for(control of images.controls; let i =$index, l=$last; track control){
+        <div class="fields" [formGroupName]="i">
+          <input type="hidden" formControlName="id">
+          <div class="nine wide field">
+            <input formControlName="url" placeholder="http://bild{{i+1}}_url">
+          </div>
+          <div class="six wide field">
+            <input formControlName="title" placeholder="Bild{{i+1}}_Titel">
+          </div>
+          @if(l){
+            <div class="one wide field">
+              <button (click)="addThumbnailControl()" class="ui large button" type="button">+</button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+    @if (errors['images']){
+      <div class="ui negative message">{{ errors['images'] }}</div>
+    }
+  </div>
+
+  <div class="field">
+    <label for="collections">Collection wählen: *</label>
+    <select name="Collection" class="ui fluid dropdown" id="collections" formControlName="collection_id">
+      @for (collection of collections; track collection) {
+        <option [value]="collection.id">
+          <span>{{ collection?.name }}</span>
+        </option>
+      }
+    </select>
+    @if(errors['colection_id']){
+      <div class="ui negative message"> {{ errors['collection_id'] }} </div>
+    }
+  </div>
+
+  <div class="field">
+    <label for="users">User wählen: *</label>
+    <select class="ui fluid dropdown" formControlName="user_id" id="users">
+      @for (user of users; track user) {
+        <option [value]="user.id">
+          <span>{{ user?.firstName }} {{ user?.lastName }}</span>
+        </option>
+      }
+    </select>
+    @if(errors['user_id']){
+      <div class="ui negative message"> {{ errors['user_id'] }} </div>
+    }
+  </div>
+
+  <div class="field">
+    <label for="tags">Tags wählen:</label>
+    <select id="tags" formControlName="tags" multiple>
+      @for (tag of tags; track tag) {
+        <option [value]="tag.id">
+          <span>{{ tag?.title }}</span>
+        </option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="todos">Todos wählen:</label>
+    <select id="todos" formControlName="todos" multiple>
+      @for (todo of todos; track todo) {
+        <option [value]="todo.id">
+          <span>{{ todo?.title }}</span>
+        </option>
+      }
+    </select>
+  </div>
+
+
+  <button type="submit" class="ui button" [disabled]="noteForm.invalid">Speichern</button>
+</form>
+
+

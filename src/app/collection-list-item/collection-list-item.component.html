@@ -1,0 +1,19 @@
+<div class="content">
+  <div class="header">{{ collection?.id }}. {{ collection?.name }}</div>
+  <div class="description">Erstellungsdatum: {{ collection?.dateOfCreation | date: 'longDate' }}</div>
+  @if (collection?.open === true){
+    <div class="extra">Öffentlich: Ja </div>
+  } @else {
+    <div class="extra">Öffentlich: Nein </div>
+  }
+  <div class="metadata">
+    @for (user of collection?.users; track user; let l =$last) {
+      <span>{{ user.firstName }} {{ user.lastName }}@if(!l){, }</span>
+    }
+  </div>
+  <div class="metadata">
+    @for (note of collection?.notes; track note; let l =$last) {
+      <span>{{ note.id }} {{ note.title }}@if(!l){, }</span>
+    }
+  </div>
+</div>

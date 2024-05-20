@@ -1,0 +1,56 @@
+@if(note){
+  <div class="ui grid">
+    <div class="four wide column">
+      @if(note.images && note.images[0]){
+        <img class="ui large image" [src]="note.images[0].url">
+      }
+    </div>
+    <div class="twelve wide column">
+      <h1 class="ui header">({{note.id }}) {{note.title }}</h1>
+      <div class="ui divider"></div>
+      <div class="ui grid">
+        <div class="four wide column">
+          <h4 class="ui header">Tags</h4>
+          @for (tag of note?.tags; track tag; let l =$last) {
+            <span>{{tag.id }} {{tag.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Todos</h4>
+          @for (todo of note?.todos; track todo; let l =$last) {
+            <span>{{todo.id }} {{todo.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">User</h4>
+          {{ note.user_id }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Collection</h4>
+          {{ note.collection_id }}
+        </div>
+      </div>
+    </div>
+    <div class="sixteen wide column">
+      <h3 class="ui header">Beschreibung</h3>
+      {{ note.description }}
+    </div>
+    <div class="sixteen wide column">
+      <div class="ui small images">
+        @for (thumbnail of note.images; track thumbnail) {
+          <img [src]="thumbnail.url">
+        }
+      </div>
+    </div>
+  </div>
+  <br> <br> <br>
+  <div class="ui buttons">
+  <button [routerLink]="'/notes'" class="ui blue button">Zurück zur Liste</button>
+  @if (authService.isLoggedIn()){
+    <button class="ui red labeled icon button" (click)="deleteNote()"><i class="remove icon"></i>Notiz löschen</button>
+    <a class="ui yellow labeled icon button" [routerLink]="['../../admin/note-form', note.id]">
+      <i class="edit icon"></i>Notiz bearbeiten
+    </a>
+  }
+  </div>
+}

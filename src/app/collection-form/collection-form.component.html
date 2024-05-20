@@ -1,0 +1,56 @@
+<h1>Collection-Formular</h1>
+<form  class="ui large form" [formGroup]="collectionForm" (ngSubmit)="submitForm()">
+  <input type="hidden" formControlName="id">
+  @if (isUpdatingCollection){
+    <div class="field disabled">
+      <label>Identifikationsnummer (Id)</label>
+      <input formControlName="id">
+    </div>
+  }
+  <div class="field">
+    <label>Name *</label>
+    <input formControlName="name">
+    @if(errors['name']){
+      <div class="ui negative message"> {{ errors['name'] }} </div>
+    }
+  </div>
+  <div class="field">
+    <label>Erstellungsdatum *</label>
+    <input type="date" formControlName="dateOfCreation">
+    @if(errors['dateOfCreation']){
+      <div class="ui negative message">{{ errors['dateOfCreation'] }} </div>
+    }
+  </div>
+  <div class="field">
+    <label>Bearbeitungsrechte *</label>
+    <input formControlName="open">
+    @if(errors['open']){
+      <div class="ui negative message"> {{ errors['open'] }} </div>
+    }
+  </div>
+
+
+  <div class="field">
+    <label for="users">Users wählen:</label>
+    <select id="users" formControlName="users" multiple>
+      @for (user of users; track user) {
+        <option [value]="user.id">
+          <span>{{ user?.firstName }} {{ user?.lastName }}</span>
+        </option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="notes">Notizen wählen:</label>
+    <select id="notes" formControlName="notes" multiple>
+      @for (note of notes; track note) {
+        <option [value]="note.id">
+          <span>{{ note?.title }}</span>
+        </option>
+      }
+    </select>
+  </div>
+
+  <button type="submit" class="ui button" [disabled]="collectionForm.invalid">Speichern</button>
+</form>

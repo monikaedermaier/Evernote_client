@@ -1,0 +1,12 @@
+<h1>Tags</h1>
+<en-search class="column" (tagSelected)="tagSelected($event)"></en-search>
+<div class="ui middle aligned selection divided list">
+  @for (tag of tags; track tag){
+    <a class="item en-tag-list-item" [tag]="tag" [routerLink]="tag.id.toString()"></a>
+  }
+</div>
+@if (authService.isLoggedIn()){
+  <button class="ui primary button" [routerLink]="['/admin/tag-form']">
+    Tag anlegen
+  </button>
+}

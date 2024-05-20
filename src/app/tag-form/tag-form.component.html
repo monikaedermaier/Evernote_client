@@ -1,0 +1,51 @@
+<h1>Tagformular</h1>
+<form  class="ui large form" [formGroup]="tagForm" (ngSubmit)="submitForm()">
+  <div class="field">
+    <label>Titel *</label>
+    <input type="text" id="title" formControlName="title">
+    @if(errors['title']){
+      <div class="ui negative message"> {{ errors['title'] }} </div>
+    }
+  </div>
+
+  <div class="field">
+    <label for="notes">Notizen wählen:</label>
+    <select id="notes" formControlName="notes" multiple>
+      @for (note of notes; track note) {
+        <option [value]="note.id">
+          <span>{{ note?.title }}</span>
+        </option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="todos">ToDos wählen:</label>
+    <select id="todos" formControlName="todos" multiple>
+      @for (todo of todos; track todo) {
+        <option [value]="todo.id">
+          <span>{{ todo?.title }}</span>
+        </option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="users">User wählen: *</label>
+    <select name="user" class="ui fluid dropdown" id="users" formControlName="user_id">
+      @for (user of users; track user) {
+        <option [value]="user.id">
+          <span>{{ user?.firstName }} {{ user?.lastName }}</span>
+        </option>
+      }
+    </select>
+    @if(errors['user_id']){
+      <div class="ui negative message"> {{ errors['user_id'] }} </div>
+    }
+  </div>
+
+  <button type="submit" class="ui button" [disabled]="tagForm.invalid">Speichern</button>
+</form>
+
+
+

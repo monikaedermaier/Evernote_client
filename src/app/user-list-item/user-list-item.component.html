@@ -1,0 +1,8 @@
+@if (user && user.images && user.images[0]){
+  <img class="ui tiny image" [src]="user.images[0].url"/>
+}
+<div class="content">
+  <div class="header">ID: {{ user?.id }}</div>
+  <div class="header">{{ user?.firstName }} {{ user?.lastName }}</div>
+  <div class="description">{{ user?.email }}</div>
+</div>

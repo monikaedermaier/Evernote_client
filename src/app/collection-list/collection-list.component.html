@@ -1,0 +1,12 @@
+<h1>Collections</h1>
+<div class="ui middle aligned selection divided list">
+  @for (collection of collections; track collection){
+    <a class="item en-collection-list-item" [collection]="collection" [routerLink]="collection.id.toString()"></a>
+  }
+</div>
+@if (authService.isLoggedIn()){
+  <button class="ui primary button" [routerLink]="['/admin/collection-form']">
+    Collection anlegen
+  </button>
+}
+

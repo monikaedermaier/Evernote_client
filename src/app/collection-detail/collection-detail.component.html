@@ -1,0 +1,41 @@
+@if(collection){
+  <div class="ui grid">
+    <div class="twelve wide column">
+      <h1 class="ui header">({{ collection.id }}) {{ collection.name }}</h1>
+      <div class="ui divider"></div>
+      <div class="ui grid">
+        <div class="four wide column">
+          <h4 class="ui header">Erstellungsdatum</h4>
+          {{ collection.dateOfCreation | date: 'longDate' }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Öffentlich</h4>
+          {{ collection.open ? 'ja' : 'nein' }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Users</h4>
+          @for (user of collection?.users; track user; let l =$last) {
+            <span>{{ user.firstName }} {{ user.lastName }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Notizen</h4>
+          @for (note of collection?.notes; track note; let l =$last) {
+            <span>{{ note.id }} {{ note.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <br> <br> <br>
+  <div class="ui buttons">
+  <button [routerLink]="'/collections'" class="ui blue button">Zurück zur Liste</button>
+  @if (authService.isLoggedIn()){
+    <button class="ui red labeled icon button" (click)="deleteCollection()"><i class="remove icon"></i>Collection löschen</button>
+    <a class="ui yellow labeled icon button" [routerLink]="['../../admin/collection-form', collection.id]">
+      <i class="edit icon"></i>Collection bearbeiten
+    </a>
+  }
+  </div>
+}
+

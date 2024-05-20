@@ -1,0 +1,55 @@
+@if(user){
+  <div class="ui grid">
+    <div class="four wide column">
+      @if(user.images && user.images[0]){
+        <img class="ui large image" [src]="user.images[0].url">
+      }
+    </div>
+    <div class="twelve wide column">
+      <h1 class="ui header">({{ user.id }}) {{ user.firstName }} {{ user.lastName }}</h1>
+      <div class="ui divider"></div>
+      <div class="ui grid">
+        <div class="sixteen wide column">
+          <h3 class="ui header">E-Mail</h3>
+          {{ user.email }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Collections</h4>
+          @for (collection of user?.collections; track collection; let l =$last) {
+            <span>{{collection.id }} {{collection.name }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Notizen</h4>
+          @for (note of user?.notes; track note; let l =$last) {
+            <span>{{note.id }} {{note.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Todos</h4>
+          @for (todo of user?.todos; track todo; let l =$last) {
+            <span>{{todo.id }} {{todo.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Tags</h4>
+          @for (tag of user?.tags; track tag; let l =$last) {
+            <span>{{tag.id }} {{tag.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <br> <br> <br>
+  <div class="ui buttons">
+  <button [routerLink]="'/users'" class="ui blue button">Zurück zur Liste</button>
+  @if (authService.isLoggedIn()){
+    <button class="ui red labeled icon button" (click)="deleteUser()"><i class="remove icon"></i>User löschen</button>
+  }
+  </div>
+
+
+
+
+
+}

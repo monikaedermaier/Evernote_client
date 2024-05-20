@@ -1,0 +1,61 @@
+@if(todo){
+  <div class="ui grid">
+    <div class="four wide column">
+      @if(todo.images && todo.images[0]){
+        <img class="ui large image" [src]="todo.images[0].url">
+      }
+    </div>
+    <div class="twelve wide column">
+      <h1 class="ui header">({{ todo.id }}) {{ todo.title }}</h1>
+      <div class="ui divider"></div>
+      <div class="ui grid">
+        <div class="four wide column">
+          <h4 class="ui header">Users</h4>
+          @for (user of todo?.users; track user; let l =$last) {
+            <span>({{ user.id }}) {{ user.firstName }} {{ user.lastName }}@if(!l){, }<p></p></span>
+          }
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Fälligkeitsdatum</h4>
+          {{ todo.dueDate | date: 'longDate' }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Öffentlich</h4>
+          {{ todo.open ? 'ja' : 'nein' }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Notiz</h4>
+          {{ todo.note_id }}
+        </div>
+        <div class="four wide column">
+          <h4 class="ui header">Tags</h4>
+          @for (tag of todo?.tags; track tag; let l =$last) {
+            <span>{{ tag.id }} {{ tag.title }}@if(!l){, }<p></p></span>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="sixteen wide column">
+      <h3 class="ui header">Beschreibung</h3>
+      {{ todo.description }}
+    </div>
+    <div class="sixteen wide column">
+      <div class="ui small images">
+        @for (thumbnail of todo.images; track thumbnail) {
+          <img [src]="thumbnail.url">
+        }
+      </div>
+    </div>
+  </div>
+  <br> <br> <br>
+  <div class="ui buttons">
+  <button [routerLink]="'/todos'" class="ui blue button">Zurück zur Liste</button>
+  @if (authService.isLoggedIn()){
+    <button class="ui red labeled icon button" (click)="deleteTodo()"><i class="remove icon"></i>ToDo löschen</button>
+    <a class="ui yellow labeled icon button" [routerLink]="['../../admin/todo-form', todo.id]">
+      <i class="edit icon"></i>Todo bearbeiten
+    </a>
+  }
+  </div>
+}
+

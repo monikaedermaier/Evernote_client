@@ -1,0 +1,6 @@
+<h1>User</h1>
+<div class="ui middle aligned selection divided list">
+  @for (user of users; track user){
+    <a class="item en-user-list-item" [user]="user" [routerLink]="user.id.toString()"></a>
+  }
+</div>

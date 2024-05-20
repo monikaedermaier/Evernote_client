@@ -1,0 +1,25 @@
+<div class="ui container">
+  <div class="ui grid">
+    <div class="eight wide column">
+      <h1>Willkommen bei Evernote</h1>
+    </div>
+    <div class="eight wide column" style="text-align: right;">
+      <en-search class="column" (tagSelected)="tagSelected($event)"></en-search>
+    </div>
+  </div>
+  <br>
+  <div>
+    <p>Evernote ist deine ultimative Notiz-App für die Organisation deines Lebens.
+      Egal, ob du Ideen festhalten, Notizen machen, Listen erstellen oder wichtige Aufgaben verfolgen möchtest,
+      Evernote bietet dir alle Tools, die du benötigst, um produktiver zu sein und dein Leben zu organisieren.</p>
+    <p>Entdecke jetzt die vielfältigen Funktionen von Evernote und starte deine Reise zu mehr Effizienz und Produktivität!</p>
+  </div>
+  <br><br>
+  <div class="five ui buttons">
+    <a routerLink="../notes" class="ui red basic button">Notizen ansehen</a>
+    <a routerLink="../todos" class="ui blue basic button">Todos ansehen</a>
+    <a routerLink="../tags" class="ui green basic button">Tags ansehen</a>
+    <a routerLink="../collections" class="ui orange basic button">Collections ansehen</a>
+    <a routerLink="../users" class="ui yellow basic button">User ansehen</a>
+  </div>
+</div>
